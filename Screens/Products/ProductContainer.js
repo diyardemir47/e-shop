@@ -1,34 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, TouchableOpacity, View,  ScrollView, FlatList, Image } from 'react-native';
+import { StyleSheet, TouchableOpacity, View, Text, FlatList, Image } from 'react-native'; // Image import eklendi
 import ProductCard from './ProductCard';
 import data from '../../assets/data/products.json';
-import { Container,Header, Icon,Input,Item} from 'native-base';
 
 export default function ProductContainer() {
   const [products, setProducts] = useState([]);
-  const [productsFiltered,setProductFileted]=useState([]);
-
-
+  const [productsFiltered, setProductFiltered] = useState([]);
 
   useEffect(() => {
     setProducts(data);
-    setProductFileted(data);
+    setProductFiltered(data);
     return () => {
       setProducts([]);
     };
   }, []);
 
   return (
-    <Container>
-      <Header searchBar rounded> 
-      <Item> 
-        <Icon name='ios-search'/>
-        <Input placeholder='Search'
-        //onFocus={}
-        //onChangeText={(text)=>}
-        />
-      </Item>
-      </Header> 
     <View style={styles.container}>
       <TouchableOpacity onPress={() => console.log('Button pressed')}>
         <View style={styles.button}>
@@ -40,21 +27,18 @@ export default function ProductContainer() {
         </View>
       </TouchableOpacity>
       <Text style={styles.heading}>ÜRÜNLER</Text>
-      <ScrollView contentContainerStyle={styles.productList}>
-        <View style={styles.row}>
-          <FlatList
-            data={products}
-            numColumns={2}
-            renderItem={({ item }) => (
-              <View style={styles.productItem}>
-                <ProductCard {...item} />
-              </View>
-            )}
-            keyExtractor={(item, index) => index.toString()}
-          />
-        </View>
-      </ScrollView>
-    </View></Container>
+      <FlatList
+        data={products}
+        numColumns={2}
+        renderItem={({ item }) => (
+          <View style={styles.productItem}>
+            <ProductCard {...item} />
+          </View>
+        )}
+        keyExtractor={(item, index) => index.toString()}
+        contentContainerStyle={styles.productList} // contentContainerStyle eklendi
+      />
+    </View>
   );
 }
 
@@ -71,11 +55,6 @@ const styles = StyleSheet.create({
   },
   productList: {
     flexGrow: 1,
-  },
-  row: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    flexWrap: 'wrap',
   },
   productItem: {
     width: '48%',

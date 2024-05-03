@@ -1,6 +1,5 @@
 import React from 'react';
-import { Button } from 'react-native';
-import { StyleSheet, View, Dimensions, Image, Text } from 'react-native-web';
+import { Button, StyleSheet, View, Dimensions, Image, Text } from 'react-native';
 
 const { width } = Dimensions.get("window");
 
@@ -12,7 +11,7 @@ const ProductCard = (props) => {
       <Text style={styles.title}>
         {name.length > 15 ? name.substring(0, 15 - 3) + '...' : name}
       </Text>
-      <Image source={{uri: image ? image : 'https://cdn.pixabay.com/photo/2012/04/01/17/29/box-23649_960_720.png'}} style={styles.image} resizeMode="contain" />
+      <Image source={{ uri: image ? image : 'https://cdn.pixabay.com/photo/2012/04/01/17/29/box-23649_960_720.png' }} style={styles.image} resizeMode="contain" />
       <Text style={styles.price}>${price}</Text>
 
       {countInStock > 0 ? (
@@ -42,7 +41,7 @@ const styles = StyleSheet.create({
   },
   image: {
     width: '100%',
-    height: '50%', // Yükseklik azaltıldı
+    height: 150, // Yükseklik ayarlandı
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
     resizeMode: 'cover',
@@ -50,8 +49,8 @@ const styles = StyleSheet.create({
   price: {
     fontSize: 20,
     color: 'orange',
-    marginTop: 'auto', // En altta olması için marginTop yerine marginBottom kullanılır
-    marginBottom: 10, // Kartın altına bir boşluk ekler
+    marginBottom: 'auto', // En altta olması için marginBottom kullanılır
+    marginTop: 10, // Kartın üstüne bir boşluk ekler
   },
   title: {
     fontWeight: 'bold',
@@ -60,7 +59,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   unavailableText: {
-    marginTop: 0, // Currently Unavailable metninin yukarıda görünmesi için marginTop eklendi
+    marginTop: 10, // Currently Unavailable metninin üstünde bir boşluk ekler
     color: 'red',
     fontStyle: 'italic',
   }
