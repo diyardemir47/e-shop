@@ -1,19 +1,34 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, TouchableOpacity, View, Text, ScrollView, FlatList, Image } from 'react-native';
+import { StyleSheet, TouchableOpacity, View,  ScrollView, FlatList, Image } from 'react-native';
 import ProductCard from './ProductCard';
 import data from '../../assets/data/products.json';
+import { Container,Header, Icon,Input,Item} from 'native-base';
 
 export default function ProductContainer() {
   const [products, setProducts] = useState([]);
+  const [productsFiltered,setProductFileted]=useState([]);
+
+
 
   useEffect(() => {
     setProducts(data);
+    setProductFileted(data);
     return () => {
       setProducts([]);
     };
   }, []);
 
   return (
+    <Container>
+      <Header searchBar rounded> 
+      <Item> 
+        <Icon name='ios-search'/>
+        <Input placeholder='Search'
+        //onFocus={}
+        //onChangeText={(text)=>}
+        />
+      </Item>
+      </Header> 
     <View style={styles.container}>
       <TouchableOpacity onPress={() => console.log('Button pressed')}>
         <View style={styles.button}>
@@ -39,7 +54,7 @@ export default function ProductContainer() {
           />
         </View>
       </ScrollView>
-    </View>
+    </View></Container>
   );
 }
 
