@@ -1,43 +1,31 @@
 import React from 'react';
-import { View, StyleSheet, Dimensions } from 'react-native';
+import { StyleSheet, Dimensions, View } from 'react-native';
 import { Content, Left, Body, ListItem, Thumbnail, Text } from 'native-base';
 
+var { width } = Dimensions.get("window");
 
-var {width}=Dimensions.get("window");
-
-
-const SearchedProducts = (props) => { // props parametresi eklendi
+const SearchedProducts = (props) => {
     const { productFiltered } = props;
+
     return (
-        <Content style={{width:width}}>
-            {
-                productFiltered.length > 0 ? (
-                    productFiltered.map((item) => (
-                        <ListItem 
-                            key={item.id}
-                            avatar
-                        >
-                            <Left>
-                                <Thumbnail 
-                                    source={{
-                                        uri: item.image ? item.image : 'https://cdn.pixabay.com/photo/2012/04/01/17/29/box-23649_960_720.png'
-                                    }}
-                                />
-                            </Left>
-                            <Body>
-                                <Text>{item.name}</Text>
-                                <Text note>{item.description}</Text>
-                            </Body>
-                        </ListItem>
-                    ))
-                ) : (
-                    <View style={styles.center}>
-                        <Text style={{ alignSelf: 'center' }}>
-                            No products match the selected criteria
-                        </Text>
-                    </View>
-                )
-            }
+        <Content style={{ width: width }}>
+            {productFiltered.length > 0 ? (
+                productFiltered.map((item) => (
+                    <ListItem key={item.id} avatar>
+                        <Left>
+                            <Thumbnail source={{ uri: item.image ? item.image : 'https://cdn.pixabay.com/photo/2012/04/01/17/29/box-23649_960_720.png' }} />
+                        </Left>
+                        <Body>
+                            <Text>{item.name}</Text>
+                            <Text note>{item.description}</Text>
+                        </Body>
+                    </ListItem>
+                ))
+            ) : (
+                <View style={styles.center}>
+                    <Text style={{ alignSelf: 'center' }}>No products match the selected criteria</Text>
+                </View>
+            )}
         </Content>
     );
 }

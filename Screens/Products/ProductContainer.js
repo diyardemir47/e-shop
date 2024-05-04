@@ -2,82 +2,71 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, TouchableOpacity, View, Text, FlatList, Image } from 'react-native'; // Image import eklendi
 import ProductCard from './ProductCard';
 import data from '../../assets/data/products.json';
-import { Container,Input,Item,Header, Icon } from 'native-base';
+import { Container, Input, Item, Header, Icon } from 'native-base';
 import SearchedProducts from './SearchedProducts';
+import ProductList from './ProductList';
+import Banner from '../../Shared/Banner';
 
 export default function ProductContainer() {
   const [products, setProducts] = useState([]);
-  const [productsFiltered, setProductFiltered] = useState([]);
-  const [focus,setFocus]=useState();
+  const [productsFiltered, setProductsFiltered] = useState([]);
+  const [focus, setFocus] = useState(false);
 
   useEffect(() => {
     setProducts(data);
-    setProductFiltered(data);
-    setFocus(false);
+    setProductsFiltered(data);
     return () => {
       setProducts([]);
-      setProductFiltered([])
-      setFocus()
+      setProductsFiltered([]);
     };
   }, []);
 
-const searchProduct=(text) =>{
+  const searchProduct = (text) => {
+    setProductsFiltered(
+      products.filter((i) => i.name.toLowerCase().includes(text.toLowerCase()))
+    );
+  };
 
-  setProductFiltered(
-    products.filter((i)=>i.name.toLowerCase().includes(text.toLowerCase()))
-  )
-}
+  const openList = () => {
+    setFocus(true);
+  };
 
-const openList=()=> {
-  setFocus(true);
-}
-
-const onBlur=()=>{
-  setFocus(false);
-}
+  const onBlur = () => {
+    setFocus(false);
+  };
 
   return (
-<Container>
-  <Header>
-    <Item>
-      <Icon name='ios-search'/>
-      <Input placeholder='Search' 
-      onFocus={openList}
-      onChangeText={(text)=> searchProduct(text)}
-      />
-
-      {focus==true ? (
-        <Icon onPress={onBlur} name='ios-close' />
-      ):null} 
-    </Item>
-  </Header>
-  {focus==true ? (
-<SearchedProducts productsFiltered={productsFiltered}/>
-  ): (
-<View style={styles.container}>
-      <TouchableOpacity onPress={() => console.log('Button pressed')}>
-        <View style={styles.button}>
-          <Image
-            source={require('../../assets/chameleon.png')}
-            style={styles.buttonIcon}
+    <Container>
+      <Header>
+        <Item>
+          <Icon name='ios-search' />
+          <Input
+            placeholder='Search'
+            onFocus={openList}
+            onChangeText={(text) => searchProduct(text)}
           />
-          <Text style={styles.buttonText}>Press me</Text>
-        </View>
-      </TouchableOpacity>
-      <Text style={styles.heading}>ÜRÜNLER</Text>
-      <FlatList
-        data={products}
-        numColumns={2}
-        renderItem={({ item }) => (
-          <View style={styles.productItem}>
-            <ProductCard {...item} />
+          {focus ? <Icon onPress={onBlur} name='ios-close' /> : null}
+        </Item>
+      </Header>
+      {focus ? (
+        <SearchedProducts productsFiltered={productsFiltered} />
+      ) : (
+        <View style={styles.container}>
+          <View>
+            <Banner />
           </View>
-        )}
-        keyExtractor={(item, index) => index.toString()}
-        contentContainerStyle={styles.productList} // contentContainerStyle eklendi
-      />
-    </View>
-  )}
+          <View style={styles.listContainer}>
+            <FlatList
+              data={products}
+              numColumns={2}
+              renderItem={({ item }) => (
+                <ProductList key={item.brand} item={item} />
+              )}
+              keyExtractor={(item) => item.brand}
+            />
+          </View>
+        </View>
+      )}
     </Container>
   );
 }
