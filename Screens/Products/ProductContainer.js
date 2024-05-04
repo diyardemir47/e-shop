@@ -2,21 +2,59 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, TouchableOpacity, View, Text, FlatList, Image } from 'react-native'; // Image import eklendi
 import ProductCard from './ProductCard';
 import data from '../../assets/data/products.json';
+import { Container,Input,Item,Header, Icon } from 'native-base';
+import SearchedProducts from './SearchedProducts';
 
 export default function ProductContainer() {
   const [products, setProducts] = useState([]);
   const [productsFiltered, setProductFiltered] = useState([]);
+  const [focus,setFocus]=useState();
 
   useEffect(() => {
     setProducts(data);
     setProductFiltered(data);
+    setFocus(false);
     return () => {
       setProducts([]);
+      setProductFiltered([])
+      setFocus()
     };
   }, []);
 
+const searchProduct=(text) =>{
+
+  setProductFiltered(
+    products.filter((i)=>i.name.toLowerCase().includes(text.toLowerCase()))
+  )
+}
+
+const openList=()=> {
+  setFocus(true);
+}
+
+const onBlur=()=>{
+  setFocus(false);
+}
+
   return (
-    <View style={styles.container}>
+<Container>
+  <Header>
+    <Item>
+      <Icon name='ios-search'/>
+      <Input placeholder='Search' 
+      onFocus={openList}
+      onChangeText={(text)=> searchProduct(text)}
+      />
+
+      {focus==true ? (
+        <Icon onPress={onBlur} name='ios-close' />
+      ):null} 
+    </Item>
+  </Header>
+  {focus==true ? (
+<SearchedProducts productsFiltered={productsFiltered}/>
+  ): (
+<View style={styles.container}>
       <TouchableOpacity onPress={() => console.log('Button pressed')}>
         <View style={styles.button}>
           <Image
@@ -39,6 +77,8 @@ export default function ProductContainer() {
         contentContainerStyle={styles.productList} // contentContainerStyle eklendi
       />
     </View>
+  )}
+    </Container>
   );
 }
 

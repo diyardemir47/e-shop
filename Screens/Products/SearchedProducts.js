@@ -1,11 +1,15 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Dimensions } from 'react-native';
 import { Content, Left, Body, ListItem, Thumbnail, Text } from 'native-base';
+
+
+var {width}=Dimensions.get("window");
+
 
 const SearchedProducts = (props) => { // props parametresi eklendi
     const { productFiltered } = props;
     return (
-        <Content>
+        <Content style={{width:width}}>
             {
                 productFiltered.length > 0 ? (
                     productFiltered.map((item) => (
