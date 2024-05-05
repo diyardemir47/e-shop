@@ -7,6 +7,9 @@ import { NavigationContainer } from '@react-navigation/native';
 //Navigator
 import Main from './Navigators/Main';
 
+//Redux
+import {Provider} from 'react-redux';
+import store from './Redux/store';
 
 LogBox.ignoreAllLogs(true);
 
