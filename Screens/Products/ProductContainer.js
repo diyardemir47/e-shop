@@ -10,7 +10,7 @@ import CategoryFilter from './CategoryFilter';
 
 const productCategories = require('../../assets/data/categories.json');
 var { height } = Dimensions.get('window')
-export default function ProductContainer() {
+export default function ProductContainer(props) {
   const [products, setProducts] = useState([]);
   const [productsFiltered, setProductsFiltered] = useState([]);
   const [focus, setFocus] = useState(false);

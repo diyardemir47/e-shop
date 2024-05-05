@@ -3,16 +3,22 @@ import { StyleSheet, Text, View,LogBox } from 'react-native';
 //Screens 
 import ProductContainer from './Screens/Products/ProductContainer';
 import Header from './Shared/Header';
+import { NavigationContainer } from '@react-navigation/native';
+//Navigator
+import Main from './Navigators/Main';
+
 
 LogBox.ignoreAllLogs(true);
 
 export default function App() {
   return (
-    <View style={styles.container}>
+
+    <NavigationContainer>
+  
       <Header/>
-   <ProductContainer/>
-      <StatusBar style="auto" />
-    </View>
+   <Main/>
+     
+   </NavigationContainer>
   );
 }
 

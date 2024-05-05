@@ -1,19 +1,28 @@
 import React from 'react';
-import { StyleSheet, Dimensions, View } from 'react-native';
+import { View, StyleSheet, Dimensions} from 'react-native'
 import { Content, Left, Body, ListItem, Thumbnail, Text } from 'native-base';
 
-var { width } = Dimensions.get("window");
+var { width } = Dimensions.get("window")
 
-const SearchedProducts = (props) => {
-    const { productFiltered } = props;
-
-    return (
+const SearchedProduct = (props) => {
+    const { productsFiltered } = props;
+    return(
         <Content style={{ width: width }}>
-            {productFiltered.length > 0 ? (
-                productFiltered.map((item) => (
-                    <ListItem key={item.id} avatar>
+            {productsFiltered.length > 0 ? (
+                productsFiltered.map((item) => (
+                    <ListItem
+                        onPress={() => {
+                            props.navigation.navigate("Product Detail", {item: item})
+                        }}
+                        key={item._id.$oid}
+                        avatar
+                    >
                         <Left>
-                            <Thumbnail source={{ uri: item.image ? item.image : 'https://cdn.pixabay.com/photo/2012/04/01/17/29/box-23649_960_720.png' }} />
+                            <Thumbnail 
+                                source={{uri: item.image ? 
+                                    item.image : 'https://cdn.pixabay.com/photo/2012/04/01/17/29/box-23649_960_720.png'
+                                        }}
+                            />
                         </Left>
                         <Body>
                             <Text>{item.name}</Text>
@@ -23,18 +32,21 @@ const SearchedProducts = (props) => {
                 ))
             ) : (
                 <View style={styles.center}>
-                    <Text style={{ alignSelf: 'center' }}>No products match the selected criteria</Text>
+                    <Text style={{ alignSelf:  'center' }}>
+                        No products match the selected criteria
+                    </Text>
                 </View>
             )}
         </Content>
     );
-}
+};
 
 const styles = StyleSheet.create({
     center: {
         justifyContent: 'center',
         alignItems: 'center',
+        height: 100
     }
-});
+})
 
-export default SearchedProducts;
+export default SearchedProduct;

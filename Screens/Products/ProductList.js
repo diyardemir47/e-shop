@@ -1,22 +1,26 @@
 import React from 'react';
-import { TouchableOpacity, View, Dimensions ,Text} from 'react-native';
-import ProductCard from './ProductCard';
+import { TouchableOpacity, View, Dimensions } from 'react-native';
 
-const { width } = Dimensions.get("window");
+import ProductCard from './ProductCard'
+
+var { width } = Dimensions.get("window");
 
 const ProductList = (props) => {
     const { item } = props;
-
-    return (
-        <View style={{ width: '50%' }}> {/* TouchableOpacity kullanmadan direkt View kullanıldı */}
-     <TouchableOpacity onPress={() => {/* Handle press */}} style={{ width: '100%', backgroundColor: 'gainsboro', padding: 10 }}>
-    <Text>{item.name}</Text>
-    <Text note>{item.description}</Text>
-</TouchableOpacity>
-
+    return(
+        <TouchableOpacity 
+        style={{ width: '50%' }}
+        onPress={() => 
+            props.navigation.navigate("Product Detail", { item: item})
+        }
+        >
+            <View style={{ width: width / 2, 
+                backgroundColor: 'gainsboro'}}
+        >
             <ProductCard {...item} />
-        </View>
-    );
+            </View>
+        </TouchableOpacity>
+    )
 }
 
 export default ProductList;
