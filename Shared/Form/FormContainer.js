@@ -26,7 +26,7 @@ container:{
     marginBottom:400,
     width:width,
     justifyContent:'center',
-    alignContent:'center',
+    alignItems:'center',
 
 },
 title:{
