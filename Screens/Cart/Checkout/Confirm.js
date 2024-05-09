@@ -1,12 +1,13 @@
 import React from "react";
-import {View,Text,Dimensions,ScrollView} from 'react-native';
+import {View,Text,Dimensions,ScrollView,Button} from 'react-native';
 
 import { Left,Text,Right,ListItem,Thumbnail,Body } from "native-base";
 
 import { connect } from "react-redux";
 import * as actions from '../../../Redux/Actions/cartAction'
+import { style } from "deprecated-react-native-prop-types/DeprecatedViewPropTypes";
 
-var {height} =Dimensions.get("window")
+var {width, height} =Dimensions.get("window")
 
 const confirm = props.route.params
 
@@ -14,6 +15,18 @@ const confirm = props.route.params
 
 
 const Confirm=(props)=> {
+
+
+const confirmOrder=() => {
+
+setTimeout(()=> {
+    props.clearCart();
+    props.navigation.navigate("Cart")
+}
+,500)
+
+}
+
 
 return (
 
@@ -36,12 +49,60 @@ return (
 
 </View>
 
+<Text style={styles.title}>
+    Items:
+</Text>
+
+{confirm.order.order.orderItems.map((x)=>{
+    return (
+        <ListItem style={styles.listItem}
+        key={x.product.name}
+        avatar
+        
+        > 
+        <Left>
+            <Thumbnail
+            source={{uri:x.product.image}}
+            />
+        </Left>
+
+<Body style={styles.body}>
+
+<Left>
+    <Text>
+       {x.product.name} 
+    </Text>
+</Left>
+<Right>
+
+    <Text>
+        ${x.product.price}
+    </Text>
+</Right>
+</Body>
+        </ListItem>
+    )
+})}
+
+
 </View>
 : null }
+
+<View style={{alignItems:'center',margin:20}}>
+    <Button  title={'Place Holder'}  onPress={confirmOrder}/>
+
+</View>
+
 </View>
  </ScrollView>
 )
 
+}
+
+const mapDispatchToProps=(dispatch)=>{
+    return {
+        clearCart:()=> dispatch(actions.clearCart())
+    }
 }
 
 const styles=StyleSheet.create({
@@ -59,14 +120,24 @@ backgroundColor:'white'
         justifyContent:'center',
         alignItems:'center',
     },
-    shipping:{
+    title:{
         alignSelf:'center',
         margin:8,
         fontSize:16,
         fontWeight:'bold'
 
+    },listItem:{
+        alignItems:'center',
+        backgroundColor:'white',
+        justifyContent:'center',
+        width:width / 1.2
+
+    },body:{
+        margin:10,
+        alignItems:'center',
+        flexDirection:'row'
     }
 })
 
 
-export default Confirm;
+export default connect(null,mapDispatchToProps) (Confirm);
