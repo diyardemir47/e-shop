@@ -1,17 +1,17 @@
 import React from 'react';
 import { View,Text, } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 
 const Register=(props) => {
 
     return (
 
-        <View>
-<Text>
-    Register Screen
-</Text>
+  <KeyboardAwareScrollView
+  viewIsInsideTabBar={true}
+  >
 
-        </View>
+  </KeyboardAwareScrollView>
     )
 
 } 
