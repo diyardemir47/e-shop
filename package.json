@@ -50,6 +50,7 @@
     "@babel/core": "^7.20.0",
     "@babel/preset-typescript": "^7.24.1",
     "ts-loader": "^9.5.1",
+    "webpack": "^5.91.0",
     "webpack-dev-server": "^3.11.3"
   },
   "private": true
