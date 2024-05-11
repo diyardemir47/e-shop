@@ -1,4 +1,4 @@
-import React ,{ useEffect,useState} from 'react';
+import React ,{ useContext,useEffect,useState} from 'react';
 
 import { View,Text,StyleSheet,Button } from 'react-native';
 
@@ -7,7 +7,14 @@ import FormContainer from '../../Shared/Form/FormContainer';
 import Input from '../../Shared/Form/Input';
 import Error from '../../Shared/Error';
 
+//Context
+import AuthGlobal from '../../Context/store/AuthGlobal';
+
+import {loginUser} from "../../Context/actions/Auth.action"
+
 const Login=(props) => {
+
+
     const context = useContext(AuthGlobal);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
