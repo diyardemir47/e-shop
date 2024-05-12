@@ -1,12 +1,12 @@
 import React ,{useState,useEffect} from "react";
 import { Text } from "react-native";
 import { Button, Item,Picker } from "native-base";
-
+import { KeyboardAvoidingView } from "react-native";
 import Icon from 'react-native-vector-icons/FontAwesome'
 import FormContainer from "../../../Shared/Form/FormContainer";
 import Input from "../../../Shared/Form/Input";
 
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view'
+
 import { connect } from "react-redux";
 import { width } from "deprecated-react-native-prop-types/DeprecatedImagePropType";
 
@@ -49,7 +49,7 @@ const checkOut=()=> {
 }
 
     return (
-    <KeyboardAwareScrollView viewIsInsideTabBar={true}
+    <KeyboardAvoidingView  viewIsInsideTabBar={true}
     extraHeight={200}
     enableOnAndroid={true}
     >
@@ -120,7 +120,7 @@ onPress={()=> checkOut()}
 />
 </View>
 </FormContainer>
-    </KeyboardAwareScrollView>
+    </KeyboardAvoidingView >
     )
 }
 

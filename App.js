@@ -1,6 +1,5 @@
-import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { LogBox } from "react-native";
+import { Platform } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import Toast from "react-native-toast-message";
 
@@ -11,13 +10,17 @@ import store from "./Redux/store";
 // Context API
 import Auth from "./Context/store/Auth";
 
-// Navigatiors
+// Navigators
 import Main from "./Navigators/Main";
 
 // Screens
 import Header from "./Shared/Header";
 
-LogBox.ignoreAllLogs(true);
+if (Platform.OS === "web") {
+  // Web için LogBox kullanmak istemiyorsanız
+  console.log("Ignoring all logs on web platform");
+  console.ignoreAllLogs(true);
+}
 
 export default function App() {
   return (
