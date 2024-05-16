@@ -1,21 +1,27 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import {
-    View,StyleSheet,
-    Text,Image,TouchableHighLight,
-    Dimensions,Button,
-    TouchableOpacity
+    View,
+    StyleSheet,
+    Text,
+    Image,
+    TouchableHighLight,
+    TouchableOpacity,
+    Dimensions,
+    Button,
+    Modal
 } from "react-native";
+import Icon from "react-native-vector-icons/FontAwesome"
+import EasyButton from "../../Shared/StyledComponents/EasyButton";
 
-import Icon from "react-native-vector-icons/FontAwesome";
+var { width } = Dimensions.get("window");
 
-var {width}=Dimensions.get("window");
+const ListItem = (props) => {
 
-const ListItem=(props)=> {
     const [modalVisible, setModalVisible] = useState(false)
 
-return (
-    <View>
-          <Modal
+    return(
+        <View>
+            <Modal
                 animationType="fade"
                 transparent={true}
                 visible={modalVisible}
@@ -23,7 +29,7 @@ return (
                     setModalVisible(false)
                 }}
             >
-  <View style={styles.centeredView}>
+                <View style={styles.centeredView}>
                     <View style={styles.modalView}>
                         <TouchableOpacity
                             underlayColor="#E8E8E8"
@@ -39,7 +45,7 @@ return (
                         >
                             <Icon name="close" size={20} />
                         </TouchableOpacity>
-                        <Button 
+                        <EasyButton 
                         medium 
                         secondary
                         onPress={() => [
@@ -48,18 +54,16 @@ return (
                         ]}
                         >
                             <Text style={styles.textStyle}>Edit</Text>
-                        </Button>
-                        <Button 
+                        </EasyButton>
+                        <EasyButton 
                         medium 
                         danger
                         onPress={() => [props.delete(props._id), setModalVisible(false)]}
                         >
                             <Text style={styles.textStyle}>Delete</Text>
-                        </Button>
+                        </EasyButton>
                     </View>
                 </View>
-
-
 
             </Modal>
             <TouchableOpacity
@@ -71,24 +75,25 @@ return (
                     backgroundColor: props.index % 2 == 0 ? "white" : "gainsboro"
                 }]}
             >
-            <Image source={{
-                uri:props.image ? props.image: "https://cdn.pixabay.com/photo/2012/04/01/17/29/box-23649_960_720.png"
-            }}
-            resizeMode="contain" 
-            style={styles.image}
-            />
-            <Text style={styles.item}>{props.brand}</Text>
-            <Text style={styles.item}  numberOfLines={1} ellipsizeMode="tail">{props.name}</Text>
-            <Text style={styles.item} numberOfLines={1} ellipsizeMode="tail">{props.category.name}</Text>
-<Text>${props.price}</Text>
-        </TouchableOpacity>
-    </View>
-)
-
-
+                <Image 
+                    source={{
+                        uri: props.image
+                        ? props.image
+                        : 'https://cdn.pixabay.com/photo/2012/04/01/17/29/box-23649_960_720.png'
+                    }}
+                    resizeMode="contain"
+                    style={styles.image}
+                />
+                <Text style={styles.item}>{props.brand}</Text>
+                <Text style={styles.item} numberOfLines={1} ellipsizeMode="tail">{props.name}</Text>
+                <Text style={styles.item} numberOfLines={1} ellipsizeMode="tail">{props.category.name}</Text>
+                <Text style={styles.item}>$ {props.price}</Text>
+            </TouchableOpacity>
+        </View>
+    )
 }
 
-const styles=StyleSheet.create({
+const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
         padding: 5,
@@ -130,7 +135,6 @@ const styles=StyleSheet.create({
         color: "white",
         fontWeight: "bold"
     }
-
 })
 
 export default ListItem;
