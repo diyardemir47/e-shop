@@ -12,6 +12,8 @@ import { width } from "deprecated-react-native-prop-types/DeprecatedImagePropTyp
 
 const countries=require("../../../assets/data/countries.json");
 
+const finalOrder=props.route.params;
+
 const Checkout =(props)=> {
 
 const [orderItems, setOrderItems] = useState();
