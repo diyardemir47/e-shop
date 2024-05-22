@@ -13,36 +13,35 @@ var { width, height } = Dimensions.get("window");
 const Confirm = (props) => {
   const finalOrder = props.route.params;
 
-  // Add this
-  const [productUpdate, setProductUpdate] = useState();
-  useEffect(() => {
-      if(finalOrder) {
-        getProducts(finalOrder);
-      }
-    return () => {
-      setProductUpdate();
-    };
-  }, [props]);
-
-  // Add this
-  const getProducts = (x) => {
-    const order = x.order.order;
-    var products = [];
-    if(order) {
-        order.orderItems.forEach((cart) => {
-            axios
-              .get(`${baseURL}products/${cart.product}`)
-              .then((data) => {
-                products.push(data.data);
-                setProductUpdate(products);
-              })
-              .catch((e) => {
-                console.log(e);
-              });
-          });
+// Add this
+const [productUpdate, setProductUpdate] = useState();
+useEffect(() => {
+    if(finalOrder) {
+      getProducts(finalOrder);
     }
-    
+  return () => {
+    setProductUpdate();
   };
+}, [props]);
+
+ // Add this
+ const getProducts = (x) => {
+  const order = x.order.order;
+  var products = [];
+  if(order) {
+      order.orderItems.forEach((cart) => {
+          axios
+            .get(`${baseURL}products/${cart.product}`)
+            .then((data) => {
+              products.push(data.data);
+              setProductUpdate(products);
+            })
+            .catch((e) => {
+              console.log(e);
+            });
+        });
+  }
+};
 
   const confirmOrder = () => {
     const order = finalOrder.order.order;
@@ -85,7 +84,7 @@ const Confirm = (props) => {
               <Text>City: {finalOrder.order.order.city}</Text>
               <Text>Zip Code: {finalOrder.order.order.zip}</Text>
               <Text>Country: {finalOrder.order.order.country}</Text>
-            </View>
+              </View>
             <Text style={styles.title}>Items:</Text>
             {/* CHANGE THIS */}
             {productUpdate && (

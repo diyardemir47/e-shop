@@ -35,21 +35,21 @@ const ProductCard = (props) => {
 
             { countInStock > 0 ? (
                 <View style={{ marginBottom: 60 }}>
-                    <EasyButton 
-                    primary
-                    medium
-                    onPress={() => {
-                        props.addItemToCart(props.id),
-                        Toast.show({
-                            topOffset: 60,
-                            type: "success",
-                            text1: `${name} added to Cart`,
-                            text2: "Go to your cart to complete order"
-                        })
-                    }}
-                    >
-                        <Text style={{ color: "white"}}>Add</Text>
-                    </EasyButton>
+                  <EasyButton 
+    primary
+    medium
+    onPress={() => {
+      props.addItemToCart(props.id),
+      Toast.show({
+      topOffset: 60,
+      type: "success",
+      text1: `${name} added to Cart`,
+      text2: "Go to your cart to complete order"
+      })
+      }}
+   >
+    <Text style={{ color: "white"}}>Add</Text>
+ </EasyButton>
                 </View>
             ) : <Text style={{ marginTop: 20 }}>Currently Unavailable</Text>}
         </View>
