@@ -26,3 +26,7 @@ Projenin yerel olarak çalıştırılması için şu adımları izleyebilirsiniz
 
    ```bash
    git clone https://github.com/diyardemir47/e-shop
+<div style="font-family: Arial, sans-serif; font-size: 16px; color: #333; padding: 10px; background-color: #f8f8f8; border-radius: 5px;">
+    <p style="margin-bottom: 10px;">Katkıda Bulunma</p>
+    <p style="margin-bottom: 10px;">Katkılarınızı büyük bir memnuniyetle karşılıyoruz! Projeyle ilgili herhangi bir öneriniz veya sorunuz varsa lütfen bir <a href="https://github.com/kullanici/adim/adim/issues" style="color: #007bff; text-decoration: none;">işlem açın</a>.</p>
+</div>
