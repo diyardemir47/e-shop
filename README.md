@@ -1,4 +1,7 @@
 # E-Ticaret Mobil Uygulaması
+![kawaii](https://github.com/diyardemir47/e-shop/assets/99801830/f4ab89c1-9f05-4826-b1b4-94b7ecb85937)
+
+
 
 Bu proje, "Build E-Shop Mobile App with Admin Panel and Authentication using React Native, Expo, Redux, Context API and much more" kursunu başarıyla tamamlayarak geliştirdiğim bir e-ticaret mobil uygulamasını içerir. Bu projede, React Native, Redux, Node.js, Express ve MongoDB gibi teknolojileri kullanarak çapraz platform uyumlu bir e-ticaret uygulaması geliştirdim.
 
